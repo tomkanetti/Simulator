@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import view.MapDisplayer?>
+<?import javafx.scene.image.ImageView?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.viewController">
+   <top>
+      <SplitPane dividerPositions="0.29797979797979796, 0.5" prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <items>
+            <AnchorPane minHeight="400.0" minWidth="262.0" prefHeight="400.0" prefWidth="262.0">
+               <children>
+                  <Button fx:id="connectButton" layoutX="30.0" layoutY="42.0" mnemonicParsing="false" onAction="#connect" onMouseClicked="#connect" prefHeight="27.0" prefWidth="92.0" text="    Connect">
+                     <font>
+                        <Font name="Aharoni Bold" size="12.0" />
+                     </font></Button>
+                  <Button fx:id="calculatePathButton" disable="true" layoutX="30.0" layoutY="307.0" mnemonicParsing="false" onAction="#calculatePath" onMouseClicked="#calculatePath" prefHeight="27.0" prefWidth="203.0" text="Calculate Path">
+                     <font>
+                        <Font name="Aharoni Bold" size="12.0" />
+                     </font></Button>
+                  <Button fx:id="loadDataButton" layoutX="141.0" layoutY="42.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="92.0" text="Load Data" onAction="#openCSV" onMouseClicked="#openCSV">   
+                     <font>
+                        <Font name="Aharoni Bold" size="12.0" />
+                     </font></Button>
+                  <Circle fx:id="redLight" layoutX="47.0" layoutY="55.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+                     <fill>
+                        <RadialGradient centerX="0.7277777777777777" centerY="0.33333333333333337" radius="0.5">
+                           <stops>
+                              <Stop color="RED" />
+                              <Stop color="#ad0000" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                     <effect>
+                        <DropShadow height="4.0" radius="1.5" width="4.0" />
+                     </effect>
+                  </Circle>
+                  <Circle fx:id="greenLight" layoutX="47.0" layoutY="55.0" opacity="0.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+                     <fill>
+                        <RadialGradient centerX="0.7277777777777777" centerY="0.33333333333333337" radius="0.5">
+                           <stops>
+                              <Stop color="#00ff45" />
+                              <Stop color="#0abf00" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                     <effect>
+                        <DropShadow height="4.0" radius="1.5" width="4.0" />
+                     </effect>
+                  </Circle>
+                  <MapDisplayer fx:id="mapDisplayer" height="200.0" layoutX="32.0" layoutY="107.0" width="200.0" onMouseClicked="#clicked"   />  
+               	
+               </children>
+            </AnchorPane>
+            <AnchorPane minHeight="400.0" minWidth="262.0" prefHeight="400.0" prefWidth="207.0">
+               <children>
+                  <Button fx:id="loadFileButton" layoutX="31.0" layoutY="307.0" mnemonicParsing="false" onAction="#openFile" onMouseClicked="#openFile" prefHeight="27.0" prefWidth="151.0" text="Load File">
+                     <font>
+                        <Font name="Aharoni Bold" size="12.0" />
+                     </font>
+                  </Button>
+                  <RadioButton fx:id="autoCB" graphicTextGap="17.0" layoutX="47.0" layoutY="36.0" mnemonicParsing="false" onAction="#allAutoPilotMode" prefHeight="42.0" prefWidth="170.0" text="Auto-Pilot">
+                     <font>
+                        <Font name="Aharoni Bold" size="22.0" />
+                     </font>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="checkButtomAM" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <TextArea fx:id="txtArea" layoutX="31.0" layoutY="107.0" prefHeight="200.0" prefWidth="200.0" />
+                  <Button fx:id="runButton" layoutX="182.0" layoutY="307.0" mnemonicParsing="false" onAction="#run" onMouseClicked="#run" prefHeight="27.0" prefWidth="49.0" text="Run">
+                     <font>
+                        <Font name="Aharoni Bold" size="12.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+            <AnchorPane minHeight="400.0" minWidth="20.0" prefHeight="400.0" prefWidth="236.0">
+               <children>
+                  <RadioButton fx:id="manualCB" graphicTextGap="17.0" layoutX="54.0" layoutY="41.0" mnemonicParsing="false" onAction="#allManualMode" prefHeight="42.0" prefWidth="170.0" selected="true" text="Manual" toggleGroup="$checkButtomAM">
+                     <font>
+                        <Font name="Aharoni Bold" size="22.0" />
+                     </font>
+                  </RadioButton>
+                  <Pane accessibleRole="NODE" layoutX="56.0" layoutY="152.0" prefHeight="149.0" prefWidth="165.0">
+                     <children>
+                        <Circle fx:id="circle" fill="#a3c2c2" onMouseDragged="#changeStateOfCircle" onMousePressed="#changeStateOfCircle" onMouseReleased="#backJostickToDef" radius="82.0" stroke="BLACK" strokeType="INSIDE" translateX="80.0" translateY="70.0" />
+                        
+                                            
+                              <Circle fx:id="joystick" fill="#e4d4d4" mouseTransparent="true" pickOnBounds="true" radius="32.0" stroke="#0000005a" strokeType="INSIDE" translateX="80.0" translateY="70.0">
+                                 <effect>
+                                    <InnerShadow color="#000000c3" height="38.52" radius="18.8275" width="38.79">
+                                       <input>
+                                          <DropShadow color="#000000a7" height="42.129999999999995" offsetX="8.0" offsetY="8.0" radius="20.472499999999997" width="41.76" />
+                                       </input>
+                                    </InnerShadow>
+                                 </effect>
+                              </Circle>
+                          
+                        
+                     </children>
+                  </Pane>
+                  <Text layoutX="101.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- aileron -" wrappingWidth="81.4462890625">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="192.0" layoutY="234.0" rotate="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- elevator -">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="113.0" layoutY="345.0" stroke="#cf6c6c" strokeType="INSIDE" strokeWidth="0.0" text="rudder" wrappingWidth="56.00000000000023">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="-5.0" layoutY="229.0" rotate="-90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="throtlle">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
+                  <Slider fx:id="rudderSlider" layoutX="72.0" layoutY="314.0" max="1.0" min="-1.0" onMouseClicked="#changePositionrudderSlider" prefHeight="14.0" prefWidth="133.0" />
+                  <Slider fx:id="throtlleSilder" layoutX="28.0" layoutY="166.0" max="1.0" onMouseClicked="#changePositionthrotlleSilder" orientation="VERTICAL" prefHeight="110.0" prefWidth="26.0" />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </top>
+</BorderPane>
